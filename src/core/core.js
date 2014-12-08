@@ -136,7 +136,7 @@ define(function (require) {
     //////////////////////////////////////////////
     // PRIVATE p5 PROPERTIES AND METHODS
     //////////////////////////////////////////////
-
+    this._pauseOnBlur = true;
     this._setupDone = false;
     this._pixelDensity = window.devicePixelRatio || 1; // for handling hidpi
     this._startTime = new Date().getTime();
@@ -440,10 +440,14 @@ define(function (require) {
 
     var self = this;
     window.addEventListener('focus', function() {
+      if(this._pauseOnBlur && this._loop === 0)
+        this._loop =true;
       self._setProperty('focused', true);
     });
 
     window.addEventListener('blur', function() {
+      if(this._pauseOnBlur && this._loop === true)
+        this._loop = 0;
       self._setProperty('focused', false);
     });
 
