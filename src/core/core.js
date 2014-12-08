@@ -440,14 +440,16 @@ define(function (require) {
 
     var self = this;
     window.addEventListener('focus', function() {
-      if(this._pauseOnBlur && this._loop === 0)
+      if(this._pauseOnBlur && this._loop === 0) {
         this._loop =true;
+    }
       self._setProperty('focused', true);
     });
 
     window.addEventListener('blur', function() {
-      if(this._pauseOnBlur && this._loop === true)
+      if(this._pauseOnBlur && this._loop === true) {
         this._loop = 0;
+      }
       self._setProperty('focused', false);
     });
 
